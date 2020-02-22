@@ -24,6 +24,10 @@ const corners = (state = []) => {
   }
   const xs = state.map(([x, _]) => x);
   const ys = state.map(([_, y]) => y);
+  return {
+    topRight: [Math.max(...xs), Math.max(...ys)],
+    bottomleft: [Math.min(...xs), Math.min(...ys)]
+  }
 };
 
 const printCells = (state) => {};
