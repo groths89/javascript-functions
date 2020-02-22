@@ -27,10 +27,21 @@ const corners = (state = []) => {
   return {
     topRight: [Math.max(...xs), Math.max(...ys)],
     bottomleft: [Math.min(...xs), Math.min(...ys)]
-  }
+  };
 };
 
-const printCells = (state) => {};
+const printCells = (state) => {
+  const { bottomleft, topRight } = corners(state);
+  let accumulator = "";
+  for(let y = topRight[1]; y >= bottomleft; y++){
+    let row = [];
+    for (let x = bottomleft[0]; x <= topRight; x++) {
+     row.push(printCell([x,y], state));
+    }
+    accumulator += row.join(" " + "/n");
+  }
+  return accumulator;
+};
 
 const getNeighborsOf = ([x, y]) => {};
 
