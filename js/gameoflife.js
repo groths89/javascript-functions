@@ -9,10 +9,19 @@ function same([x, y], [j, k]) {
 // The game state to search for `cell` is passed as the `this` value of the function.
 function contains(cell) {
   return this.some(c => same(c, cell));
-}
+};
 
-const printCell = (cell, state) => {
-  return contains.call(state, cell) ? "\u25A3" : "\u25A2";
+const sum = ([x,y], [j,k]) => [x+j, y+k];
+
+const getNeighborsOf = ([x, y]) => {
+  [x-1, y+1], [x, y+1], [x+1, y+1],
+  [x-1, y],             [x-1, y],
+  [x-1, y-1], [x, y-1], [x+1, y-1]
+};
+
+
+const getLivingNeighbors = (cell, state) => {
+  return getNeighborsOf(cell).filter((n) => contains.bind(state)(n));
 };
 
 const corners = (state = []) => {
@@ -30,6 +39,33 @@ const corners = (state = []) => {
   };
 };
 
+
+
+
+
+
+
+const willBeAlive = (cell, state) => {};
+
+const calculateNext = (state) => {};
+
+const iterate = (state, iterations) => {};
+
+const main = (pattern, iterations) => {};
+
+
+
+
+
+
+
+
+
+
+const printCell = (cell, state) => {
+  return contains.call(state, cell) ? "\u25A3" : "\u25A2";
+};
+
 const printCells = (state) => {
   const { bottomleft, topRight } = corners(state);
   let accumulator = "";
@@ -43,17 +79,7 @@ const printCells = (state) => {
   return accumulator;
 };
 
-const getNeighborsOf = ([x, y]) => {};
 
-const getLivingNeighbors = (cell, state) => {};
-
-const willBeAlive = (cell, state) => {};
-
-const calculateNext = (state) => {};
-
-const iterate = (state, iterations) => {};
-
-const main = (pattern, iterations) => {};
 
 const startPatterns = {
     rpentomino: [
