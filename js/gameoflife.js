@@ -11,17 +11,8 @@ function contains(cell) {
   return this.some(c => same(c, cell));
 };
 
-const sum = ([x,y], [j,k]) => [x+j, y+k];
-
-const getNeighborsOf = ([x, y]) => {
-  [x-1, y+1], [x, y+1], [x+1, y+1],
-  [x-1, y],             [x-1, y],
-  [x-1, y-1], [x, y-1], [x+1, y-1]
-};
-
-
-const getLivingNeighbors = (cell, state) => {
-  return getNeighborsOf(cell).filter((n) => contains.bind(state)(n));
+const printCell = (cell, state) => {
+  return contains.call(state, cell) ? "\u25A3" : "\u25A2";
 };
 
 const corners = (state = []) => {
@@ -29,41 +20,15 @@ const corners = (state = []) => {
     return {
       topRight: [0,0],
       bottomleft: [0,0]
-    }
+    };
   }
+
   const xs = state.map(([x, _]) => x);
   const ys = state.map(([_, y]) => y);
   return {
     topRight: [Math.max(...xs), Math.max(...ys)],
     bottomleft: [Math.min(...xs), Math.min(...ys)]
   };
-};
-
-
-
-
-
-
-
-const willBeAlive = (cell, state) => {};
-
-const calculateNext = (state) => {};
-
-const iterate = (state, iterations) => {};
-
-const main = (pattern, iterations) => {};
-
-
-
-
-
-
-
-
-
-
-const printCell = (cell, state) => {
-  return contains.call(state, cell) ? "\u25A3" : "\u25A2";
 };
 
 const printCells = (state) => {
@@ -79,7 +44,24 @@ const printCells = (state) => {
   return accumulator;
 };
 
+const getNeighborsOf = ([x, y]) => {
+  [x-1, y+1], [x, y+1], [x+1, y+1],
+  [x-1, y],             [x-1, y],
+  [x-1, y-1], [x, y-1], [x+1, y-1]
+};
 
+
+const getLivingNeighbors = (cell, state) => {
+  return getNeighborsOf(cell).filter((n) => contains.bind(state)(n));
+};
+
+const willBeAlive = (cell, state) => {};
+
+const calculateNext = (state) => {};
+
+const iterate = (state, iterations) => {};
+
+const main = (pattern, iterations) => {};
 
 const startPatterns = {
     rpentomino: [
